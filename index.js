@@ -30,6 +30,13 @@ mongoose
   .then(() => console.log("conected !"))
   .catch(() => console.log("faild conect!"));
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    message: "Hello! I am the root!",
+  });
+});
+
 app.get("/test", (req, res) => {
   res.json("test");
 });
