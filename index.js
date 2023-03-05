@@ -16,7 +16,7 @@ const jwtScret = "jsg63sddbcad92lkldovnr96arw";
 app.use(
   cors({
     credentials: true,
-    origin: "https://fabulous-hummingbird-672157.netlify.app/",
+    origin: "https://fabulous-hummingbird-672157.netlify.app",
   })
 );
 app.use(cookieParser());
