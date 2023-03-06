@@ -16,7 +16,7 @@ const jwtScret = "jsg63sddbcad92lkldovnr96arw";
 app.use(
   cors({
     credentials: true,
-    origin: "https://fabulous-hummingbird-672157.netlify.app",
+    origin: "http://localhost:3000",
   })
 );
 app.use(cookieParser());
@@ -201,6 +201,8 @@ app.put(
           content,
           cover: newPath ? newPath : postDoc.cover,
         });
+
+        res.status(200).json(postDoc);
       });
     } catch (err) {
       res.status(400).json(err);
