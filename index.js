@@ -24,17 +24,9 @@ app.use(express.json());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
 mongoose.set("strictQuery", true);
-mongoCFG = {
-  useNewUrlParser: true,
-  ssl: true,
-  replicaSet: "<clusterName>-shard-0",
-  authSource: "admin",
-  retryWrites: true,
-  useUnifiedTopology: true,
-};
 
 mongoose
-  .connect(process.env.URL_MONGODB, mongoCFG)
+  .connect(process.env.URL_MONGODB)
   .then(() => console.log("conected !"))
   .catch(() => console.log("faild conect!"));
 
