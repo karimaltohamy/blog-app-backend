@@ -79,6 +79,7 @@ app.post("/api/login", async (req, res) => {
               _id: userDoc._id,
               username: userDoc.username,
               email: userDoc.email,
+              token,
             });
           }
         );
@@ -128,6 +129,8 @@ app.post(
     const { token } = req.cookies;
 
     try {
+      if (!token) return res.status(400).send("invalid token");
+
       jwt.verify(token, jwtScret, {}, async (err, user) => {
         const postDoc = await Post.create({
           title,
@@ -137,10 +140,10 @@ app.post(
           cover: newPath,
           author: user.id,
         });
-        res.status(200).json(postDoc);
+        return res.status(200).json(postDoc);
       });
     } catch (err) {
-      res.status(400).json(err);
+      return res.status(400).json(err);
     }
   }
 );
@@ -182,6 +185,8 @@ app.put(
 
     try {
       const { token } = req.cookies;
+
+      if (!token) return res.status(400).send("invalid token");
 
       jwt.verify(token, jwtScret, {}, async (err, user) => {
         if (err) throw err;
