@@ -75,12 +75,20 @@ app.post("/api/login", async (req, res) => {
           {},
           (err, token) => {
             if (err) throw err;
-            res.cookie("token", token).json({
-              _id: userDoc._id,
-              username: userDoc.username,
-              email: userDoc.email,
-              token,
-            });
+            res
+              .cookie("token", token, {
+                secure: true,
+                sameSite: "none",
+                domain: "/",
+                path: "/",
+                httpOnly: false,
+              })
+              .json({
+                _id: userDoc._id,
+                username: userDoc.username,
+                email: userDoc.email,
+                token,
+              });
           }
         );
       } else {
