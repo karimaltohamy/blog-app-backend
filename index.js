@@ -150,7 +150,7 @@ app.get("/api/posts", async (req, res) => {
     const posts = await Post.find().populate("author").sort({ createdAt: -1 });
     res.status(200).json(posts);
   } catch (err) {
-    res.status(400).json("faild");
+    res.status(400).json(err);
   }
 });
 
@@ -161,7 +161,7 @@ app.get("/api/posts/:id", async (req, res) => {
     const postDoc = await Post.findById(id).populate("author");
     res.status(200).json(postDoc);
   } catch (err) {
-    res.status(400).json("faild");
+    res.status(400).json(err);
   }
 });
 
